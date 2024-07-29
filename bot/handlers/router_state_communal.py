@@ -1,7 +1,7 @@
 from aiogram import types
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
-from aiogram import Router
+from aiogram import Router, F
 from aiogram.filters import Command, StateFilter
 from aiogram.enums import ParseMode
 
@@ -14,10 +14,10 @@ class Form(StatesGroup):
     electric = State()
 
 
-@router.message(Command('givecommunal'))
-async def cmd_start(message: types.Message, state: FSMContext):
+@router.callback_query(F.data == 'post_shk')
+async def process_start(callback: types.CallbackQuery, state: FSMContext):
     await state.set_state(Form.cold)
-    await message.answer("Введите показания холодной:")
+    await callback.message.answer("Введите показания холодной:")
 
 
 @router.message(StateFilter(Form.cold))
