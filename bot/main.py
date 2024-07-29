@@ -4,21 +4,25 @@ import sys
 
 from decouple import config
 from aiogram import Bot, Dispatcher, html
+from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 
 from commands import setup_bot_command
 
 TOKEN = config('BOT_TOKEN')
+storage = MemoryStorage()
 bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 
 
 async def main() -> None:
-    dp = Dispatcher()
+    dp = Dispatcher(storage=storage)
 
     # Можно ещё добавлять роутеры
-    from handlers import routers
-    dp.include_router(routers.router)
+    from handlers import router_state_communal, router_callback, routers_index
+    dp.include_router(routers_index.router)
+    dp.include_router(router_state_communal.router)
+    dp.include_router(router_callback.router)
 
     await setup_bot_command(bot)
 
