@@ -3,7 +3,7 @@ import datetime
 from aiogram import Router, F
 from aiogram import types
 from aiogram.enums.dice_emoji import DiceEmoji
-from aiogram.types import Message
+from aiogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.filters import Command
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
@@ -19,7 +19,19 @@ router = Router()
 )
 async def cmd_start(message: Message):
     """Start command"""
-    await message.answer(f'@{message.from_user.username}, привет! Ты хочешь подать показания?')
+
+    buttons = [
+        [InlineKeyboardButton(text="Подать Школьную", callback_data="post_shk")],
+        [InlineKeyboardButton(text="Подать Зиповскую", callback_data="post_zip")],
+        [InlineKeyboardButton(text="Отчет PDF", callback_data="get_all_pdf")],
+        [InlineKeyboardButton(text="Отчет в сообщении", callback_data="get_all")],
+    ]
+    keyboard = InlineKeyboardMarkup(inline_keyboard=buttons)
+
+    await message.answer(
+        f'@{message.from_user.username}, привет! Ты хочешь подать показания?',
+        reply_markup=keyboard
+    )
 
 
 @router.message(
