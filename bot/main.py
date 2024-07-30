@@ -24,12 +24,16 @@ async def main() -> None:
         router_callback,
         router_zip_state,
         router_zip_callback,
+        router_shk_state,
+        router_shk_callback,
     )
 
     dp.include_router(routers_index.router)
     dp.include_router(router_callback.router)
     dp.include_router(router_zip_state.router)
     dp.include_router(router_zip_callback.router)
+    dp.include_router(router_shk_state.router)
+    dp.include_router(router_shk_callback.router)
 
     await setup_bot_command(bot)
 
