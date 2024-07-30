@@ -58,15 +58,7 @@ def get_report_keyboard():
 
 def get_cancel_btn():
     buttons = [
-        [KeyboardButton(text="Отмена")],
+        [InlineKeyboardButton(text="Отмена", callback_data="cancel")],
     ]
-    keyboard = ReplyKeyboardMarkup(keyboard=buttons)
-    return keyboard
-
-
-def get_back_btn():
-    buttons = [
-        [KeyboardButton(text="Назад")],
-    ]
-    keyboard = ReplyKeyboardMarkup(keyboard=buttons)
+    keyboard = InlineKeyboardMarkup(inline_keyboard=buttons)
     return keyboard

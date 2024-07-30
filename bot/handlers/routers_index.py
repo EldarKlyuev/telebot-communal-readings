@@ -46,12 +46,12 @@ async def cmd_get_chat_id(message: Message):
     await message.answer(f"""@{user_id.username}, привет!\nТвой chatId = {user_id.id}""")
 
 
-@router.message(
-    F.text.lower() == 'отмена'
+@router.callback_query(
+    F.data == 'cancel'
 )
-async def cmd_cancel(message: Message, state: FSMContext):
+async def cmd_cancel(callback: types.CallbackQuery, state: FSMContext):
     await state.clear()
-    await message.answer(
+    await callback.message.answer(
         text="Действие отменено",
         reply_markup=ReplyKeyboardRemove()
     )
