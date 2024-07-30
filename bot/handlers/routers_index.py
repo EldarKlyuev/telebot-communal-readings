@@ -46,7 +46,9 @@ async def cmd_get_chat_id(message: Message):
     await message.answer(f"""@{user_id.username}, привет!\nТвой chatId = {user_id.id}""")
 
 
-@router.message(Command(commands=["cancel"]))
+@router.message(
+    F.text.lower() == 'отмена'
+)
 async def cmd_cancel(message: Message, state: FSMContext):
     await state.clear()
     await message.answer(

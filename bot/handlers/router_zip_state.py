@@ -5,6 +5,8 @@ from aiogram import Router, F
 from aiogram.filters import Command, StateFilter
 from aiogram.enums import ParseMode
 
+from keyboards.keyboards import get_cancel_btn
+
 router = Router()
 
 
@@ -17,21 +19,21 @@ class Form(StatesGroup):
 @router.callback_query(F.data == 'post_zip_all')
 async def process_start(callback: types.CallbackQuery, state: FSMContext):
     await state.set_state(Form.cold)
-    await callback.message.answer("Введите показания холодной:")
+    await callback.message.answer("Введите показания холодной:", reply_markup=get_cancel_btn())
 
 
 @router.message(StateFilter(Form.cold))
 async def process_cold(message: types.Message, state: FSMContext):
     await state.update_data(cold=message.text)
     await state.set_state(Form.warm)
-    await message.answer("Введите показания горячей:")
+    await message.answer("Введите показания горячей:", reply_markup=get_cancel_btn())
 
 
 @router.message(StateFilter(Form.warm))
 async def process_warm(message: types.Message, state: FSMContext):
     await state.update_data(warm=message.text)
     await state.set_state(Form.electric)
-    await message.answer("Введите показания электричества:")
+    await message.answer("Введите показания электричества:", reply_markup=get_cancel_btn())
 
 
 @router.message(StateFilter(Form.electric))

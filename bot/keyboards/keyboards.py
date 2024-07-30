@@ -1,4 +1,4 @@
-from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, KeyboardButton, ReplyKeyboardMarkup
 
 
 def get_start_keyboard():
@@ -53,4 +53,20 @@ def get_report_keyboard():
         [InlineKeyboardButton(text="Назад", callback_data="back")],
     ]
     keyboard = InlineKeyboardMarkup(inline_keyboard=buttons)
+    return keyboard
+
+
+def get_cancel_btn():
+    buttons = [
+        [KeyboardButton(text="Отмена")],
+    ]
+    keyboard = ReplyKeyboardMarkup(keyboard=buttons)
+    return keyboard
+
+
+def get_back_btn():
+    buttons = [
+        [KeyboardButton(text="Назад")],
+    ]
+    keyboard = ReplyKeyboardMarkup(keyboard=buttons)
     return keyboard
