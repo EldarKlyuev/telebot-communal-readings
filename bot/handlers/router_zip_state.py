@@ -41,5 +41,5 @@ async def process_electric(message: types.Message, state: FSMContext):
     user_data = await state.get_data()
     await message.answer(f"Полные ваши показания:\nХолодная: {user_data['cold']}\nГорячая: {user_data['warm']}\nЭлетричество: {user_data['electric']}", parse_mode=ParseMode.MARKDOWN)
     
-    # Тут обращение к app
+    # TODO: запрос на поные данные для зипа
     await state.clear()

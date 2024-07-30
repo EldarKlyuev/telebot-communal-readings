@@ -8,7 +8,6 @@ async def setup_bot_command(bot):
         BotCommand(command='/start', description='Старт'),
         BotCommand(command='/test', description='Тест работы'),
         BotCommand(command='/getmyid', description='Получить свой ChatID'),
-        BotCommand(command='/givecommunal', description='Подача показаний'),
         BotCommand(command='/cancel', description='Отменить текущие действия'),
     ]
 
