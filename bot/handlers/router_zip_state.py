@@ -14,7 +14,7 @@ class Form(StatesGroup):
     electric = State()
 
 
-@router.callback_query(F.data == 'post_shk')
+@router.callback_query(F.data == 'post_zip_all')
 async def process_start(callback: types.CallbackQuery, state: FSMContext):
     await state.set_state(Form.cold)
     await callback.message.answer("Введите показания холодной:")

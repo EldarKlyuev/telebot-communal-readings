@@ -19,10 +19,17 @@ async def main() -> None:
     dp = Dispatcher(storage=storage)
 
     # Можно ещё добавлять роутеры
-    from handlers import router_state_communal, router_callback, routers_index
+    from handlers import (
+        routers_index,
+        router_callback,
+        router_zip_state,
+        router_zip_callback,
+    )
+
     dp.include_router(routers_index.router)
-    dp.include_router(router_state_communal.router)
     dp.include_router(router_callback.router)
+    dp.include_router(router_zip_state.router)
+    dp.include_router(router_zip_callback.router)
 
     await setup_bot_command(bot)
 

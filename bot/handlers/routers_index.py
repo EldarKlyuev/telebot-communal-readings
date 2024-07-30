@@ -3,12 +3,13 @@ import datetime
 from aiogram import Router, F
 from aiogram import types
 from aiogram.enums.dice_emoji import DiceEmoji
+from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.filters import Command
-from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 from filters.admin_filter import AdminCreatorFilter
 from filters.chat_type import GroupTypeFilter
+from aiogram.types import Message, ReplyKeyboardRemove
 
 router = Router()
 
@@ -49,3 +50,12 @@ async def cmd_get_chat_id(message: Message):
     """Получение свое ChatID"""
     user_id = message.from_user
     await message.answer(f"""@{user_id.username}, привет!\nТвой chatId = {user_id.id}""")
+
+
+@router.message(Command(commands=["cancel"]))
+async def cmd_cancel(message: Message, state: FSMContext):
+    await state.clear()
+    await message.answer(
+        text="Действие отменено",
+        reply_markup=ReplyKeyboardRemove()
+    )
