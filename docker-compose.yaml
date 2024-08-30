@@ -10,3 +10,10 @@ services:
     restart: unless-stopped
     env_file:
       - .env
+  
+
+  backend:
+    container_name: server_bot
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile
