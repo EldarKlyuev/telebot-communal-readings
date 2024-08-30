@@ -1,3 +1,5 @@
+from routing.zipovskaya import router as router_zip
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -15,6 +17,4 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
-async def root():
-    return {"message": "я тоже работаю"}
+app.include_router(router=router_zip)
