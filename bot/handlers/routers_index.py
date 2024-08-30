@@ -1,4 +1,6 @@
 import datetime
+import requests
+from decouple import config
 
 from aiogram import Router, F
 from aiogram import types
@@ -14,6 +16,8 @@ from keyboards.keyboards import get_start_keyboard
 
 
 router = Router()
+
+SERVER_API = config('SERVER_API')
 
 
 @router.message(
@@ -33,7 +37,9 @@ async def cmd_start(message: Message):
     Command(commands=["test"])
 )
 async def cmd_test(message: Message):
-    """Проверка работоспособности"""
+    r = requests.get(SERVER_API)
+    if r.status_code == 200:
+        await message.answer('Бек работает')
     await message.answer(f"@{message.from_user.username}, я работаю!")
 
 
