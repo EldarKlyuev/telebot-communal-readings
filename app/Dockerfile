@@ -1,15 +1,14 @@
 FROM python:3.10-alpine3.13
 
-WORKDIR /code
+EXPOSE 8000
 
+WORKDIR /app 
 
-COPY ./requirements.txt /code/requirements.txt
+COPY requirements.txt /app
 
+RUN pip3 install -r requirements.txt --no-cache-dir
 
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+COPY . /app 
 
+CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
 
-COPY ./app /code/app
-
-
-CMD ["fastapi", "run", "app/main.py", "--port", "8000"]

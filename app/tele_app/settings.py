@@ -75,25 +75,23 @@ WSGI_APPLICATION = 'tele_app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'backend.db.backend.postgresql',
-#         'NAME': os.environ.get('DB_NAME') or 'botserver',
-#         'USER': os.environ.get('DB_LOGIN') or 'root',
-#         'PASSWORD': os.environ.get('DB_PASSWORD') or 'root',
-#         'HOST': os.environ.get('DB_HOST') or 'localhost',
-#         'PORT': os.environ.get('DB_PORT') or 5432,
-#         'CONN_MAX_AGE': 60,
-#         'CONN_HEALTH_CHECKS': True,
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'backend.db.backend.postgresql',
+        'NAME': 'botserver',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': 5432
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

@@ -16,15 +16,18 @@ services:
   
 
   backend:
-    container_name: server_bot
+    container_name: russpass_backend
     build:
-      context: ./server
-      dockerfile: ./Dockerfile
+      context: ./app
+      dockerfile: Dockerfile
     networks:
       - my-network
+    ports:
+      - 8000:8000
     depends_on:
       - db
   
+
   db:
     container_name: bot_db
     image: postgres:14-alpine
