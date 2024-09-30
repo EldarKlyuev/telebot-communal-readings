@@ -5,6 +5,7 @@ class ZipModel(models.Model):
     cold = models.IntegerField(null=True)
     warm = models.IntegerField(null=True)
     electric = models.IntegerField(null=True)
+    date_to = models.DateTimeField(auto_now_add=True, null=True)
 
     class Meta:
         verbose_name = 'Зиповская'
@@ -17,6 +18,7 @@ class ShkolnaiaModel(models.Model):
     cold_bath = models.IntegerField(null=True)
     warm_bath = models.IntegerField(null=True)
     electric = models.IntegerField(null=True)
+    date_to = models.DateTimeField(auto_now_add=True, null=True)
 
     class Meta:
         verbose_name = 'Школьная'
