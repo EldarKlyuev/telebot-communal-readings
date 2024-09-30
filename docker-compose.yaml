@@ -11,8 +11,6 @@ services:
     restart: unless-stopped
     env_file:
       - .env
-    depends_on:
-      - db
   
 
   backend:
@@ -24,23 +22,6 @@ services:
       - my-network
     ports:
       - 8000:8000
-    depends_on:
-      - db
-  
-
-  db:
-    container_name: bot_db
-    image: postgres:14-alpine
-    ports:
-      - 32700:5432
-    volumes:
-      - ./data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
-      POSTGRES_DB: botserver
-    networks:
-      - my-network
 
 
 networks:
