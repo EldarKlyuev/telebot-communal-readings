@@ -7,14 +7,13 @@ services:
       dockerfile: ./Dockerfile
     networks:
       - my-network
-    container_name: python-bot
+    container_name: telebot_bot
     restart: unless-stopped
     env_file:
       - .env
   
-
   backend:
-    container_name: russpass_backend
+    container_name: telebot_backend
     build:
       context: ./app
       dockerfile: Dockerfile
@@ -24,7 +23,12 @@ services:
       - 8000:8000
     env_file:
       - .env
-
+  
+  db_cache:
+    container_name: telebot_db_cache
+    image: redis
+    ports:
+      - 6379:6379
 
 networks:
   my-network:
